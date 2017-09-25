@@ -3,6 +3,7 @@ namespace App\Controller\Api;
 
 use App\Controller\Api\ApiController;
 use Cake\Network\Exception\UnauthorizedException;
+use Cake\Network\Exception\BadRequestException;
 use Cake\Log\Log;
 
 /* Players Controller
@@ -58,6 +59,11 @@ class PlayersController extends ApiController
     if(!$clientIdentifier){
       throw new UnauthorizedException('Client Identifier not found');
     }
+    
+    /*if(empty($data['email'])){
+      throw new BadRequestException(__('Email is required','email'));
+    }*/
+
     //$ref_code = 'ref12';
     //$ref_code = $this->request->query['ref_code'];
     /*validate vendor on basis of client identifier*/

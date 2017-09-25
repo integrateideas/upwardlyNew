@@ -8,7 +8,7 @@
             </a>
 
             <div class="stats-label text-color">
-                <span class="font-extra-bold font-uppercase"><?php //echo $sideNavData['first_name']?></span>
+                <span class="font-extra-bold font-uppercase"><?php echo $sideNavData['first_name']." ".$sideNavData['last_name']?></span>
 
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">

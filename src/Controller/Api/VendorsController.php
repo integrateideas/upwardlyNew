@@ -27,7 +27,7 @@ class VendorsController extends ApiController
   {
     parent::initialize();
     $this->loadComponent('RequestHandler');
-    $this->Auth->allow(['token']);
+    $this->Auth->allow(['token','view']);
   }
 
 
@@ -56,5 +56,22 @@ class VendorsController extends ApiController
       $this->set('status',$data['status']);
       $this->set('_serialize', ['status','data']);
   }
+
+  /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|void
+     */
+    public function view($id = null)
+    {
+
+      if (!$this->request->is(['get'])) {
+        throw new MethodNotAllowedException(__('BAD REQUEST'));
+      }
+      $vendors = $this->Vendors->get($id, ['contain' => ['VendorBadges','VendorActions','VendorLevels']]);
+
+      $this->set(['data' => $vendors,'_serialize' => ['data']]);
+
+    }
 
 }

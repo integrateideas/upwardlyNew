@@ -54,7 +54,8 @@
                     <div class="col-sm-10">
                     <?= $this->Form->input('vendor_badge_action.vendor_action_id', ['options' => $vendorActions, 'label' => false, 'class' => 'form-control']); ?>
                         <div class="form-group">
-                            <!-- <a href="#" data-toggle="modal" data-target="#basicModal"> Add Custom Action</a> -->
+                            <!-- <a href="#" data-toggle="modal" data-target="#basicModal"> Add Custom Action</a>
+                             -->
                         </div>
                     </div>
                 </div>
