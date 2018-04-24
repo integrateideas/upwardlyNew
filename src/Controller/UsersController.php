@@ -3,6 +3,12 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Auth\DefaultPasswordHasher;
+
+use Cake\Routing\Router;
+use Cake\Core\Configure;
+use Automattic\WooCommerce\Client;
+use Automattic\WooCommerce\HttpClient\HttpClientException;
+
 /**
  * Users Controller
  *
@@ -18,15 +24,68 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
-    public function index()
+    public function index($category_id = null)
     {
+
+        $this->viewBuilder()->layout('login-admin');
+
+        $woocommerce = new Client(
+            'http://revmax.twinspark.co', 
+            'ck_5ecf43a297b5341dfb68c4ba5f7e83db56125b19', 
+            'cs_6387cb6a55c87e8cd6223fbca39a92324dbfd013',
+            [
+                'wp_api' => true,
+                'version' => 'wc/v1',
+            ]
+        );
+
+             // pr($woocommerce); die('ss');
+        try {
+            // Array of response results.
+            
+            $results = $woocommerce->get('products',  ['category' =>$category_id,'per_page'=> '90']);
+
+            // $results = $woocommerce->get('products',  ['per_page' => '25','category' =>['303']]);
+            // $results = $woocommerce->get('products/attributes/40/terms');//attribute id
+
+
+            //$attributes = $woocommerce->get('products/attributes/6');
+            //pr($attributes); die('ssqq');
+            //echo wc_get_formatted_variation( $product->get_variation_attributes(), true );
+
+            // pr($results); die('ss');
+
+            // Example: ['customers' => [[ 'id' => 8, 'created_at' => '2015-05-06T17:43:51Z', 'email' => ...
+            // Last request data.
+            $lastRequest = $woocommerce->http->getRequest();
+            $lastRequest->getUrl(); // Requested URL (string).
+            $lastRequest->getMethod(); // Request method (string).
+            $lastRequest->getParameters(); // Request parameters (array).
+            $lastRequest->getHeaders(); // Request headers (array).
+            $lastRequest->getBody(); // Request body (JSON).
+
+            // Last response data.
+            $lastResponse = $woocommerce->http->getResponse();
+            $lastResponse->getCode(); // Response code (int).
+            $lastResponse->getHeaders(); // Response headers (array).
+            $lastResponse->getBody(); // Response body (JSON).
+
+
+
+        } catch (HttpClientException $e) {
+            // pr($e); die('ss');
+            $e->getMessage(); // Error message.
+            $e->getRequest(); // Last request data.
+            $e->getResponse(); // Last response data.
+        }
+
         $this->paginate = [
             'contain' => ['Vendors', 'Roles']
         ];
         $users = $this->paginate($this->Users);
 
-        $this->set(compact('users'));
-        $this->set('_serialize', ['users']);
+        $this->set(compact('users','results'));
+        $this->set('_serialize', ['users','results']);
     }
 
     /**

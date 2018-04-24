@@ -1,67 +1,130 @@
 <?php
 /**
   * @var \App\View\AppView $this
-  * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
   */
 ?>
+
 <div class="content animate-panel">
     <div class="row">
+        <?php foreach ($results as $value): ?>
         <div class="col-lg-12">
-            <div class="hpanel">
-                <div class="panel-heading">
-                    
-                </div>
-                <div class="panel-body">
-                    <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('vendor_id') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('role_id') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('phone') ?></th>
-                            <th scope="col"><?= $this->Paginator->sort('status') ?></th>
-                            <th scope="col" class="actions"><?= __('Actions') ?></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($users as $user): ?>
-                            <tr>
-                                <td><?= $this->Number->format($user->id) ?></td>
-                                <td><?= $user->has('vendor') ? $this->Html->link($user->vendor->org_name, ['controller' => 'Vendors', 'action' => 'view', $user->vendor->id]) : '' ?></td>
-                                <td><?= $user->has('role') ? $this->Html->link($user->role->name, ['controller' => 'Roles', 'action' => 'view', $user->role->id]) : '' ?></td>
-                                <td><?= h($user->first_name)." ".h($user->last_name) ?></td>
-                                <td><?= h($user->username) ?></td>
-                                <td><?= h($user->email) ?></td>
-                                <td><?= h($user->phone) ?></td>
-                                <td><?= h($user->status) ?></td>
-                                <td class="actions">
-                                <?= '<a href='.$this->Url->build(['action' => 'view', $user->id]).' class="btn btn-xs btn-success">' ?>
-                                    <i class="fa fa-eye fa-fw"></i>
-                                </a>
-                                <?= '<a href='.$this->Url->build(['action' => 'edit', $user->id]).' class="btn btn-xs btn-warning"">' ?>
-                                    <i class="fa fa-pencil fa-fw"></i>
-                                </a>
-                                <?= $this->Form->postLink(__(''), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id), 'class' => ['btn', 'btn-sm', 'btn-danger', 'fa', 'fa-trash-o', 'fa-fh']]) ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                    <div class="paginator">
-                        <ul class="pagination">
-                            <?= $this->Paginator->first('<< ' . __('first')) ?>
-                            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-                            <?= $this->Paginator->numbers() ?>
-                            <?= $this->Paginator->next(__('next') . ' >') ?>
-                            <?= $this->Paginator->last(__('last') . ' >>') ?>
-                        </ul>
-                        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+            <div class="ibox product-detail">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="product-images">
+                                <div>
+                                    <div class="image-imitation">
+                                        <img style="width:400px;height:400px;" src="<?php echo $value['images'][0]['src'];?>">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <h2 class="font-bold m-b-xs"><?php echo $value['name'];?></h2>
+                            <div class="m-t-md">
+                                <h2 class="product-main-price">Price : <?php echo $value['price'];?></h2>
+                            </div>
+                            <h4>Product description</h4>
+                            <div class="small text-muted">
+                                <?php echo $value['description'];?>
+                            </div>
+                            <!-- <dl class="small m-t-md">
+                                <dt>Description lists</dt>
+                                <dd>A description list is perfect for defining terms.</dd>
+                                <dt>Euismod</dt>
+                                <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                                <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                                <dt>Malesuada porta</dt>
+                                <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                            </dl> -->
+                            <hr>
+                        </div>
                     </div>
+                
+
                 </div>
             </div>
         </div>
+       <?php endforeach; ?>
     </div>
 </div>
+
+<style type="text/css">
+    @media print { 
+        p h1 h2 h3 {
+            font-size:10px;
+        }
+        @page {
+              size: letter landscape;
+              margin: 0;
+            }
+
+/*        hr {page-break-after: always;}*/
+        .row {
+            margin-right: -15px;
+            margin-left: -15px;
+            width: 100%;
+        }
+
+        li{
+          margin: 5px 0;
+        }
+
+        .wrapper {
+            width:100%;
+        }
+
+        #wrapper {
+            width:100%;  
+        }
+        div {
+            display: block;
+        }
+        .col-md-7 {
+            width: 58.33333333%;
+            float: left;
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .col-md-5 {
+            width: 41.66666667%;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+             font-size: 9px;
+            color: #f00;
+            text-align: center;
+          }
+        header {
+            position: fixed;
+            top: 0;
+          }
+        body {
+            height: 100%;
+            width: 100%;
+            display: block;
+            margin: 8px;
+            font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #2f4050;
+            font-size: 13px;
+            color: #676a6c;
+            overflow-x: hidden;
+        }
+
+        .gray-bg {
+            background-color: #f3f3f4;
+        }
+
+    }
+
+</style>
+<script type="text/javascript">
+    $(document).ready(function(){
+        window.print();
+    })
+</script>

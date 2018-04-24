@@ -37,6 +37,7 @@ $cakeDescription = 'Upwardly';
                                 'plugins/bootstrap/dist/js/bootstrap.min',
                                 'homer',
                             ])?>
+    <?= $this->Html->script('jquery-2.1.1') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
