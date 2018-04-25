@@ -31,7 +31,7 @@ class UsersController extends AppController
         }
         $this->viewBuilder()->layout('login-admin');
 
-        /*$woocommerce = new Client(
+        $woocommerce = new Client(
             'http://revmax.twinspark.co', 
             'ck_5ecf43a297b5341dfb68c4ba5f7e83db56125b19', 
             'cs_6387cb6a55c87e8cd6223fbca39a92324dbfd013',
@@ -39,9 +39,9 @@ class UsersController extends AppController
                 'wp_api' => true,
                 'version' => 'wc/v1',
             ]
-        );*/
+        );
 
-        $woocommerce = new Client(
+        /*$woocommerce = new Client(
             'https://revmaxconverters.com', 
             'ck_b69a201d410c15d8a6357890a2d479ad472ca1e9', 
             'cs_421cbd0374fb65ba15d2d1621c9a3495e400d702',
@@ -49,15 +49,15 @@ class UsersController extends AppController
                 'wp_api' => true,
                 'version' => 'wc/v1',
             ]
-        );
+        );*/
 
 
              // pr($woocommerce); die('ss');
         try {
             // Array of response results.
             
-            // $results = $woocommerce->get('products',  ['category' =>$category_id,'per_page'=> '90']);
-             $results = $woocommerce->get('products');
+            $results = $woocommerce->get('products',  ['category' =>$category_id,'per_page'=> '90']);
+             // $results = $woocommerce->get('products');
             // pr($results); die('ss');
 
             // $results = $woocommerce->get('products',  ['per_page' => '25','category' =>['303']]);
