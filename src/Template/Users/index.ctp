@@ -6,6 +6,7 @@
 
 <div class="content animate-panel">
     <div class="row">
+    <?php if(!empty($results) && isset($results)){ ?>
         <?php foreach ($results as $value): ?>
         <div class="col-lg-12">
             <div class="ibox product-detail">
@@ -28,6 +29,7 @@
                             <h4>Product description</h4>
                             <div class="small text-muted">
                                 <?php echo $value['description'];?>
+                                <!-- upsell_product_info -->
                             </div>
                             <!-- <dl class="small m-t-md">
                                 <dt>Description lists</dt>
@@ -38,15 +40,50 @@
                                 <dt>Malesuada porta</dt>
                                 <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
                             </dl> -->
-                            <hr>
+                            
+
+
                         </div>
+                    </div>
+
+                    <div class="row">
+                    <?php if(!empty($value['upsell_product_info']) && isset($value['upsell_product_info'])){  ?>
+                        <div class="ibox-title">
+                            <h5>Upgrades</h5>
+                        </div>
+                        <?php foreach ($value['upsell_product_info'] as $upsellValue) { ?>
+
+
+                        <div class="col-lg-4">
+                            <div class="ibox">
+                                <div class="ibox-content">
+                                    <h4><?php echo $upsellValue['name']; ?></h4>
+                                    <div class="small m-b-xs">
+                                        <strong>Price <?php echo $upsellValue['price'];?></strong>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <?php if(!empty($upsellValue['images'][0])){ ?>
+                                                <img style="width:300px;height:300px;" src="<?php echo $upsellValue['images'][0]['guid'];?>">
+                                            <?php } else{ ?>
+                                                <img style="width:300px;height:300px;" src="https://revmaxconverters.com/wp-content/uploads/2016/06/RevMax-Placeholder-BG4-1-500x500.png">
+                                            <?php }?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } } ?>
+                        
                     </div>
                 
 
                 </div>
             </div>
         </div>
-       <?php endforeach; ?>
+        
+       <?php endforeach; }?>
+
     </div>
 </div>
 
@@ -124,7 +161,10 @@
 
 </style>
 <script type="text/javascript">
-    $(document).ready(function(){
+    /*$(document).ready(function(){
         window.print();
-    })
+    })*/
 </script>
+
+
+    
