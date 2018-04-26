@@ -31,16 +31,16 @@
                                 <?php echo $value['description'];?>
                                 <!-- upsell_product_info -->
                             </div>
-                            <!-- <dl class="small m-t-md">
-                                <dt>Description lists</dt>
-                                <dd>A description list is perfect for defining terms.</dd>
-                                <dt>Euismod</dt>
-                                <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-                                <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-                                <dt>Malesuada porta</dt>
-                                <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
-                            </dl> -->
                             
+                            
+                            <?php if(!empty($value['attributes']) && isset($value['attributes'])){  ?>
+                            <?php foreach ($value['attributes'] as $attriValue) { ?>
+                                <dl class="small m-t-md">
+                                    <dt><?php echo $attriValue['name'];?> : <?php foreach ($attriValue['options'] as $key => $attriOptions) { ?><em><?php echo $attriOptions;?></em><?php }?> &nbsp;</dt> 
+                                        
+
+                                </dl>
+                            <?php } } ?>
 
 
                         </div>
