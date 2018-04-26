@@ -88,7 +88,7 @@
 </div>
 
 <style type="text/css">
-    @media print { 
+    /*@media print { 
         p h1 h2 h3 {
             font-size:10px;
         }
@@ -96,8 +96,6 @@
               size: letter landscape;
               margin: 0;
             }
-
-/*        hr {page-break-after: always;}*/
         .row {
             margin-right: -15px;
             margin-left: -15px;
@@ -157,7 +155,7 @@
             background-color: #f3f3f4;
         }
 
-    }
+    }*/
 
 </style>
 <script type="text/javascript">
