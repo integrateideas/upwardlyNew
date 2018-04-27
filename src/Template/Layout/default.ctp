@@ -26,7 +26,7 @@ $cakeDescription = 'Upwardly';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-   <!--  <?= $this->Html->css([
+   <?= $this->Html->css([
                             'plugins/bootstrap/dist/css/bootstrap',
                             'plugins/fontawesome/css/font-awesome',
                             'fonts/pe-icon-7-stroke/css/pe-icon-7-stroke',
@@ -51,7 +51,7 @@ $cakeDescription = 'Upwardly';
                                 'homer',
                                 //'charts',
                                 'super_admin'
-                            ])?> -->
+                            ])?>
     
 
     <?= $this->fetch('meta') ?>

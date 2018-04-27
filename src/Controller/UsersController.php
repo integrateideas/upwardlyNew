@@ -31,16 +31,19 @@ class UsersController extends AppController
         }
         $this->viewBuilder()->layout('login-admin');
 
-        /*$woocommerce = new Client(
-            'http://revmax.twinspark.co', 
-            'ck_5ecf43a297b5341dfb68c4ba5f7e83db56125b19', 
-            'cs_6387cb6a55c87e8cd6223fbca39a92324dbfd013',
-            [
-                'wp_api' => true,
-                'version' => 'wc/v1',
-            ]
-        );*/
+        // $woocommerce = new Client(
+        //     'http://revmax.twinspark.co', 
+        //     'ck_5ecf43a297b5341dfb68c4ba5f7e83db56125b19', 
+        //     'cs_6387cb6a55c87e8cd6223fbca39a92324dbfd013',
+        //     [
+        //         'wp_api' => true,
+        //         'version' => 'wc/v1',
+        //     ]
+        // );
 
+        
+
+        
         $woocommerce = new Client(
             'https://revmaxconverters.com', 
             'ck_b69a201d410c15d8a6357890a2d479ad472ca1e9', 
@@ -48,16 +51,28 @@ class UsersController extends AppController
             [
                 'wp_api' => true,
                 'version' => 'wc/v1',
+                'query_string_auth' => true
             ]
         );
+
+        // $woocommerce = new Client(
+        //     'https://revmaxconverters.com', 
+        //     'ck_0787b6ba80a50e8b3e41a71bba00948f665320df', 
+        //     'cs_fe7501bdf1f0f5209c4a33eeedad6283db313674',
+        //     [
+        //         'wp_api' => true,
+        //         'version' => 'wc/v2',
+        //         // 'query_string_auth' => true
+        //     ]
+        // );
 
 
              // pr($woocommerce); die('ss');
         try {
             // Array of response results.
             
-            $results = $woocommerce->get('products',  ['category' =>$category_id,'per_page'=> '90']);
              // $results = $woocommerce->get('products');
+            $results = $woocommerce->get('products',  ['category' =>$category_id,'per_page'=> '90']);
             // pr($results); die('ss');
 
             // $results = $woocommerce->get('products',  ['per_page' => '25','category' =>['303']]);
@@ -88,7 +103,7 @@ class UsersController extends AppController
 
 
         } catch (HttpClientException $e) {
-            // pr($e); die('ss');
+            pr($e); die('ss');
             $e->getMessage(); // Error message.
             $e->getRequest(); // Last request data.
             $e->getResponse(); // Last response data.
